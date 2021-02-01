@@ -1,0 +1,9 @@
+# Temp uploaded files
+/temp
+
+# compiled output
+/dist
+
+# dependencies
+/node_modules
+**/node_modules
