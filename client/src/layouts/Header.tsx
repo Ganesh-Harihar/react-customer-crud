@@ -1,12 +1,13 @@
 import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import "./Header.css"
+import "./Header.css";
+import CustomerForm from "../components/Customer-form";
+import {Link} from 'react-router-dom';
 function Header() {
   return (
     <Navbar bg="dark" expand="md" variant="dark">
-      <Navbar.Brand href="#home">Customer-CRUD</Navbar.Brand>
+      <Navbar.Brand><Link to="/" className="text-decoration-none text-white">Customer-CRUD</Link></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Button variant="outline-secondary" className="add-btn">Add</Button>
+      <CustomerForm />
     </Navbar>
   );
 }

@@ -11,6 +11,7 @@ function CustomerList() {
           <th>DOB</th>
           <th>Status</th>
           <th>Bio</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +23,10 @@ function CustomerList() {
           <td>14/04/1998</td>
           <td>Active</td>
           <td>Software Engineer</td>
+          <td>
+            <i className='bx bx-edit bx-sm mr-2' role="button"></i>
+            <i className='bx bx-trash bx-sm' role="button"></i>
+          </td>
         </tr>
       </tbody>
     </Table>

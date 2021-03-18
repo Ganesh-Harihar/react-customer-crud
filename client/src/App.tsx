@@ -4,14 +4,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./layouts/Header";
 import Container from "react-bootstrap/Container";
 import CustomerList from "./components/Customer-list";
-import CustomerForm from "./components/Customer-form";
+import { BrowserRouter, Router, Switch, Route } from "react-router-dom";
+import history from './services/History';
 function App() {
   return (
-    <Container fluid="md">
-      <Header></Header>
-      <CustomerList></CustomerList>
-      <CustomerForm></CustomerForm>
-    </Container>
+    <BrowserRouter>
+      <Router history={history}>
+        <Container fluid="md">
+          <Header></Header>
+          <Switch>
+            <Route exact path="/" component={CustomerList}></Route>
+          </Switch>
+        </Container>
+      </Router>
+    </BrowserRouter>
   );
 }
 

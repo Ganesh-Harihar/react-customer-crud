@@ -21,10 +21,13 @@ function CustomerForm() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
+      <Button
+        variant="outline-secondary"
+        className="add-btn"
+        onClick={handleShow}
+      >
+        Add
       </Button>
-
       <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add customer</Modal.Title>
@@ -83,12 +86,22 @@ function CustomerForm() {
               <Col>
                 <Form.Group controlId="formBio">
                   <Form.Label>Bio</Form.Label>
-                  <Form.Control ref={register} as="textarea" rows={3} name="bio" />
+                  <Form.Control
+                    ref={register}
+                    as="textarea"
+                    rows={3}
+                    name="bio"
+                  />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
-                  <Form.File id="formProfilePicture" label="Profile Picture" ref={register} name="prrofilePic"/>
+                  <Form.File
+                    id="formProfilePicture"
+                    label="Profile Picture"
+                    ref={register}
+                    name="prrofilePic"
+                  />
                 </Form.Group>
               </Col>
             </Row>
