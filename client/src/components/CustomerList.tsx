@@ -1,5 +1,7 @@
 import Table from "react-bootstrap/Table";
+import { Link } from "react-router-dom";
 function CustomerList() {
+  // const history = useHistory();
   return (
     <Table striped bordered hover>
       <thead>
@@ -17,7 +19,7 @@ function CustomerList() {
       <tbody>
         <tr>
           <th></th>
-          <td>Ganesh </td>
+          <td><Link to="/1">Ganesh</Link></td>
           <td>Harihar</td>
           <td>Employed</td>
           <td>14/04/1998</td>

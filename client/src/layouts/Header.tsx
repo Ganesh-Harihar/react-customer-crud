@@ -1,6 +1,6 @@
 import Navbar from "react-bootstrap/Navbar";
 import "./Header.css";
-import CustomerForm from "../components/Customer-form";
+import CustomerForm from "../components/CustomerForm";
 import {Link} from 'react-router-dom';
 function Header() {
   return (
