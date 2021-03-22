@@ -1,5 +1,2 @@
-export {
-  fecthCustomerRequest,
-  fecthCustomerSuccess,
-  fecthCustomerFailure,
-} from "./customer/CustomerActions";
+export * from "./customer/CustomerActions";
+export * from "./modal/ModalActions";

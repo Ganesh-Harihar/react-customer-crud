@@ -1,7 +1,12 @@
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { editModal } from "../redux";
+
+
 function CustomerList() {
-  // const history = useHistory();
+  const dispatch = useDispatch();
+
   return (
     <Table striped bordered hover>
       <thead>
@@ -26,7 +31,7 @@ function CustomerList() {
           <td>Active</td>
           <td>Software Engineer</td>
           <td>
-            <i className='bx bx-edit bx-sm mr-2' role="button"></i>
+            <i className='bx bx-edit bx-sm mr-2' role="button" onClick={()=> dispatch(editModal()) } ></i>
             <i className='bx bx-trash bx-sm' role="button"></i>
           </td>
         </tr>

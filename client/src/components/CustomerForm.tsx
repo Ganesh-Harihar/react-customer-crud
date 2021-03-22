@@ -1,5 +1,4 @@
 import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
@@ -7,11 +6,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
-function CustomerForm() {
-  const [show, setShow] = useState(false);
+import { closeModal } from "../redux";
+import { connect } from "react-redux";
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+function CustomerForm(props: any) {
+  const handleClose = () => props.closeModal();
 
   const { register, handleSubmit, errors } = useForm(); // initialize the hook
   const onSubmit = (data: any) => {
@@ -20,16 +19,11 @@ function CustomerForm() {
 
   return (
     <>
-      <Button
-        variant="outline-secondary"
-        className="add-btn"
-        onClick={handleShow}
-      >
-        Add
-      </Button>
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal size="lg" show={props.isModalOpen} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add customer</Modal.Title>
+          <Modal.Title>
+            {props.isModalOpenToEdit ? "Edit customer" : "Add customer"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit(onSubmit)}>
@@ -110,7 +104,7 @@ function CustomerForm() {
                 Close
               </Button>
               <Button variant="primary ml-3" type="submit">
-                Save
+                {props.isModalOpenToEdit ? "Update" : "Save"}
               </Button>
             </Form.Group>
           </Form>
@@ -120,4 +114,17 @@ function CustomerForm() {
   );
 }
 
-export default CustomerForm;
+const mapStateToProps = (state: any) => {
+  return {
+    isModalOpen: state.modal.isOpen,
+    isModalOpenToEdit: state.modal.isModalOpenToEdit,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    closeModal: () => dispatch(closeModal()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerForm);
