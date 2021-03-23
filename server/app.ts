@@ -9,11 +9,9 @@ const swaggerUi = require('swagger-ui-express');
 
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema'
 import { routingControllersToSpec } from 'routing-controllers-openapi';
-import { defaultMetadataStorage } from 'class-transformer/storage';
+import { defaultMetadataStorage } from 'class-transformer';
 
-mongoose.connect('mongodb://localhost:27017/customer-crud', {
-  useNewUrlParser: true
-});
+mongoose.connect('mongodb+srv://test:' + process.env.MONGO_ATLAS_PW + '@cluster0-zxgny.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true });
 
 let app = express();
 
@@ -58,6 +56,6 @@ useExpressServer(app, {
   controllers: [CustomerController],
 });
 
-app.use('/uploads', express.static('uploads'));
+app.use('/temp', express.static('temp'));
 
 app.listen(3001);

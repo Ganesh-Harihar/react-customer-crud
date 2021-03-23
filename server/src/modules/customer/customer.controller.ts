@@ -82,7 +82,7 @@ export class CustomerController {
         @Body() user: any,
         @Req() request: Request,
         @Res() response: Response) {
-        try {
+            try {
             user.profilePicture = profilePicture.path;
             const createdCustomer = await this.customerService.create(user);
             return response.status(200).json({

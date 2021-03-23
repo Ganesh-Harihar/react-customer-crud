@@ -84,7 +84,7 @@ const customerSchema = new Schema({
     }
 }, {
     timestamps: true,
-    collection: 'customers'
+    collection: 'react-customers'
 });
 
 

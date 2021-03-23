@@ -8,14 +8,31 @@ import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import { closeModal } from "../redux";
 import { connect } from "react-redux";
+import Http from "../services/Http";
 
 function CustomerForm(props: any) {
+  const httpService = new Http();
   const handleClose = () => props.closeModal();
 
   const { register, handleSubmit, errors } = useForm(); // initialize the hook
   const onSubmit = (data: any) => {
-    console.log(data);
+    const body = new FormData();
+    body.append("firstName", data.firstName);
+    body.append("lastName", data.lastName);
+    body.append("bio", data.lastName);
+    body.append("occupation", data.occupation);
+    body.append("profilePicture", data.profilePicture[0]);
+    httpService
+      .post("api/customers", body)
+      .then((res: any) => {
+        console.log("post res:", res);
+      })
+      .catch((error: any) => console.log("Error:", error));
   };
+
+  function dobChange(event: any) {
+    console.log("event", event);
+  }
 
   return (
     <>
@@ -70,7 +87,10 @@ function CustomerForm(props: any) {
               <Col>
                 <Form.Group controlId="formDOB">
                   <Form.Label>DOB</Form.Label>
-                  <Datetime ref={register} />
+                  <Datetime
+                    ref={register}
+                    onChange={(value) => dobChange(value)}
+                  />
                 </Form.Group>
               </Col>
             </Row>
@@ -93,7 +113,7 @@ function CustomerForm(props: any) {
                     id="formProfilePicture"
                     label="Profile Picture"
                     ref={register}
-                    name="prrofilePic"
+                    name="profilePicture"
                   />
                 </Form.Group>
               </Col>
