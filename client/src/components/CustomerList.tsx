@@ -7,9 +7,15 @@ import Http from "../services/Http";
 
 function CustomerList() {
   const httpService = new Http();
+
+  const dispatch = useDispatch();
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
+    getCustomers();
+  }, []);
+
+  const getCustomers = () => {
     httpService
       .fetch("api/customers")
       .then((res: any) => {
@@ -17,14 +23,20 @@ function CustomerList() {
         setCustomers(res.data.data);
       })
       .catch((error: any) => console.log("Error:", error));
-  }, []);
+  };
 
-  const dispatch = useDispatch();
+  const removeCustomer = (customer: any) => {
+    httpService
+      .delete(`api/customers/${customer._id}`)
+      .then((res) => getCustomers())
+      .catch((error) => console.log("Error:", error));
+  };
 
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
+          {/* {customers} */}
           <th>#</th>
           <th>First name</th>
           <th>Last name</th>
@@ -36,8 +48,8 @@ function CustomerList() {
         </tr>
       </thead>
       <tbody>
-        {customers.map((customer: any, index: number) => {
-          <tr>
+        {customers.map((customer: any, index: number) => (
+          <tr key={customer._id}>
             <th>{index + 1}</th>
             <td>
               <Link to="/1">{customer.firstName}</Link>
@@ -51,12 +63,16 @@ function CustomerList() {
               <i
                 className="bx bx-edit bx-sm mr-2"
                 role="button"
-                onClick={() => dispatch(editModal())}
+                onClick={() => dispatch(editModal(customer._id))}
               ></i>
-              <i className="bx bx-trash bx-sm" role="button"></i>
+              <i
+                className="bx bx-trash bx-sm"
+                role="button"
+                onClick={() => removeCustomer(customer)}
+              ></i>
             </td>
-          </tr>;
-        })}
+          </tr>
+        ))}
       </tbody>
     </Table>
   );

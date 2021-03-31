@@ -12,8 +12,9 @@ export const closeModal = () => {
   };
 };
 
-export const editModal = () => {
+export const editModal = (id: string) => {
   return {
     type: EDIT_MODAL,
+    payload: id,
   };
 };

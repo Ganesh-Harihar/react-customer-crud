@@ -23,7 +23,7 @@ export class CustomerService {
   }
 
   async update(userId: string, user: any): Promise<any> {
-    return await CustomerSchema.findOneAndUpdate(new ObjectID(userId), user, {
+    return await CustomerSchema.findByIdAndUpdate(new ObjectID(userId.toString()), user, {
       new: true,
     });
   }
